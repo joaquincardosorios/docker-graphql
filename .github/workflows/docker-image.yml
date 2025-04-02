@@ -24,6 +24,10 @@ jobs:
         DOCKER_USER: ${{ secrets.DOCKER_USER }}
         DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
       run: |
-        echo "Iniciando login"
         docker login -u $DOCKER_USER -p $DOCKER_PASS
-        echo "Fin del login"
+    - name: Build Docker Image
+      run: |
+        docker build -t joaquinriosc/docker-graphql:0.0.2 .
+    - name: Push Docker Image
+      run: |
+        docker push joaquinriosc/docker-graphql:0.0.2
